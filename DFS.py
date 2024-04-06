@@ -1,0 +1,28 @@
+import networkx
+import matplotlib.pyplot as plt
+from collections import deque
+graph=networkx.DiGraph()
+graph.add_node("node1") #增加節點
+graph.add_node("node2")
+graph.add_nodes_from(["node3","node4","node5","node6","node7"]) #一次增加多組節點
+graph.add_edge("node1","node2") #新增connection
+
+graph.add_edges_from([("node1","node3"),("node2","node4"),("node2","node5"),("node3","node6"),("node3","node7")])   #新增多組connections
+
+start="node1"
+DFS_list=deque([])
+nodes=["node1"]
+
+while nodes:
+    y=nodes.pop()
+    DFS_list.append(y)
+    for neighbors in graph.neighbors(y):
+        nodes.append(neighbors)
+    #print(nodes)
+print(DFS_list)
+
+
+
+
+networkx.draw(graph,with_labels=True)
+plt.show()
